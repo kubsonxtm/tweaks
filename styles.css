@@ -1,45 +1,56 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: black; /* Ustawienie czarnego tła dla całej strony */
+    color: white; /* Ustawienie białego koloru tekstu */
+    font-family: Arial, sans-serif; /* Ustawienie czcionki */
 }
 
 .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
     text-align: center;
 }
 
 h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 36px;
 }
 
 .buttons {
-    display: inline-block;
+    margin-top: 20px;
 }
 
 button {
     padding: 10px 20px;
     font-size: 18px;
-    border: none;
     cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-button:hover {
-    transform: scale(1.1);
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 
 #takButton {
-    background-color: #4CAF50;
-    color: white;
+    background-color: green; /* Ustawienie zielonego tła dla przycisku "Tak" */
+    color: white; /* Ustawienie białego koloru tekstu */
+}
+
+#takButton:hover {
+    background-color: darkgreen; /* Kolor tła po najechaniu kursorem na przycisk "Tak" */
 }
 
 #nieButton {
-    background-color: #f44336;
-    color: white;
-    margin-left: 10px;
+    background-color: red; /* Ustawienie czerwonego tła dla przycisku "Nie" */
+    color: white; /* Ustawienie białego koloru tekstu */
+}
+
+#nieButton:hover {
+    background-color: darkred; /* Kolor tła po najechaniu kursorem na przycisk "Nie" */
+}
+
+#response {
+    margin-top: 30px;
+}
+
+.gif-animation {
+    max-width: 100%;
+    height: auto;
 }
