@@ -16,7 +16,7 @@ function handleTakButtonClick() {
 
     // Tworzymy element <img> do wyświetlenia GIF-a
     var img = document.createElement('img');
-    img.src = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia1.tenor.com%2Fimages%2F019c67934c8574802821525868d320c8%2Ftenor.gif%3Fitemid%3D14537829&f=1&nofb=1&ipt=d7ad24c42d6a2013b2d84a322199f00a2c32bacc9dda22390252ce770c335b16&ipo=images'; // Zastąp 'link_do_twojego_gifa.gif' adresem URL twojego GIF-a
+    img.src = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi0.wp.com%2F4.bp.blogspot.com%2F-Ts6BKjjCmlA%2FWWCRWu4w6xI%2FAAAAAAAAHMA%2F_kXi1KOaKAQlxMlIylw9xiL8qH2RUiuXACLcBGAs%2Fs1600%2FMcDonald%252527s%252BMcSavers%252BMix%252B%252526%252BMatch%252BRM5.99%252BPromo.gif&f=1&nofb=1&ipt=328fadd10c64302b219163dda13464c0d15e8f008fee3953173d8a77b4f5c487&ipo=images'; // Zastąp 'link_do_twojego_gifa.gif' adresem URL twojego GIF-a
 
     // Dodajemy klasę lub style dla animacji GIF-a (opcjonalne)
     img.classList.add('gif-animation'); // Dodajemy klasę CSS, jeśli chcesz dostosować styl animacji
