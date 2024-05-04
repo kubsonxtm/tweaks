@@ -3,26 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmik MP4</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-    </style>
+    <title>Filmik z YouTube</title>
 </head>
 <body>
 
-<!-- Kontener do wyœrodkowania -->
-<div class="center">
-    <video controls autoplay muted width="640" height="360">
-        <source src="https://www.youtube.com/watch?v=eFTlFPRCytU" type="video/mp4">
-        <!-- Dodaj więcej źródeł w przypadku różnych formatów -->
-        Twoja przeglądarka nie obsługuje tagu wideo.
-    </video>
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/TU_ZqMC4Pik?autoplay=1&controls=0&mute=1" frameborder="0" allowfullscreen></iframe>
 </div>
 
 </body>
