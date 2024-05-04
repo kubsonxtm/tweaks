@@ -3,14 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kropka</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Pod³¹czamy zewnêtrzny plik CSS -->
+    <title>Filmik MP4</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 
 <!-- Kontener do wyœrodkowania -->
 <div class="center">
-    <img src="https://images.genius.com/a93dfab2db43ed69bd3d088ef15058e7.907x710x1.png" alt="Zdjêcie">
+    <video controls autoplay muted width="640" height="360">
+        <source src="https://www.youtube.com/watch?v=eFTlFPRCytU" type="video/mp4">
+        <!-- Dodaj więcej źródeł w przypadku różnych formatów -->
+        Twoja przeglądarka nie obsługuje tagu wideo.
+    </video>
 </div>
 
 </body>
