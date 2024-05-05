@@ -3,13 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmik z YouTube</title>
+    <title>Filmik z GitHuba</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 800px;
+            width: 100%;
+        }
+        #video-container {
+            flex: 1;
+            margin: 0 20px;
+        }
+        #gif-left,
+        #gif-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 20px;
+        }
+        #gif-left img,
+        #gif-right img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <iframe width="640" height="360" src="https://www.youtube.com/embed/YaBFzS-u6JI?autoplay=1&controls=0&mute=1" frameborder="0" allowfullscreen></iframe>
+<div id="content">
+    <div id="gif-left">
+        <img src="https://media.discordapp.net/attachments/1084240551706120283/1131005601573503116/image0.gif?ex=6638170c&is=6636c58c&hm=8a3500a74b215415f139bf9ade306692a3d8d37f2ea325c0b4d1b3ba204528fd&=&width=402&height=402" alt="left">
+    </div>
+    
+    <div id="video-container">
+        <!-- Osadzony filmik z GitHuba -->
+        <video id="myVideo" width="1000" height="563" controls>
+            <source src="https://github.com/kubsonxtm/website/raw/main/rafonix.mp4" type="video/mp4">
+            Twoja przeglądarka nie obsługuje elementu video.
+        </video>
+    </div>
+    
+    <div id="gif-right">
+        <img src="https://media.discordapp.net/attachments/1084240551706120283/1131005601573503116/image0.gif?ex=6638170c&is=6636c58c&hm=8a3500a74b215415f139bf9ade306692a3d8d37f2ea325c0b4d1b3ba204528fd&=&width=402&height=402" alt="right">
+    </div>
 </div>
+
+<script>
+    // Pobranie elementu wideo
+    const video = document.getElementById('myVideo');
+
+    // Odtwarzanie wideo po załadowaniu strony
+    window.onload = function() {
+        video.play();
+    };
+</script>
 
 </body>
 </html>
