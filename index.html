@@ -1,61 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>imo rel</title>
+    <title>psycha siada</title>
     <style>
         body {
-            background-color: black;
+            font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #000; /* Ustaw tło na czarne */
+            color: #fff; /* Ustaw kolor tekstu na biały */
         }
-        #content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 800px;
-            width: 100%;
+        .countdown {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
-        #video-container {
-            flex: 1;
-            margin: 0 20px;
-        }
-        #gif-left,
-        #gif-right {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 20px;
-        }
-        #gif-left img,
-        #gif-right img {
-            max-width: 200px;
+        video {
+            max-width: 100%;
             height: auto;
         }
     </style>
 </head>
 <body>
+    <div class="countdown" id="countdown">
+        Odliczanie...
+    </div>
 
-<div id="content">
-    <div id="gif-left">
-        <img src="https://media.discordapp.net/attachments/1084240551706120283/1131005601573503116/image0.gif?ex=6639688c&is=6638170c&hm=d3e8a8a0dcfecffeefb6daed542de72a89a9526638d49dfb83324c43f96afe51&" alt="left">
-    </div>
-    
-    <div id="video-container">
-        <video id="myVideo" width="1000" height="563" controls>
-            <source src="https://github.com/kubsonxtm/website/raw/main/rafonix.mp4" type="video/mp4">
-            Twoja przeglądarka nie obsługuje elementu video.
-        </video>
-    </div>
-    
-    <div id="gif-right">
-        <img src="https://media.discordapp.net/attachments/1084240551706120283/1131005601573503116/image0.gif?ex=6639688c&is=6638170c&hm=d3e8a8a0dcfecffeefb6daed542de72a89a9526638d49dfb83324c43f96afe51&" alt="right">
-    </div>
-</div>
+    <video controls>
+        <source src="https://github.com/kubsonxtm/website/raw/main/rafonix.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date("June 5, 2024 09:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "ggwp";
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML =
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
