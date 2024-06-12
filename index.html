@@ -1,69 +1,148 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>losowanko</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: black;
-            color: white;
-        }
-        img {
-            max-width: 50%;
-            max-height: 50%;
-            opacity: 0;
-            animation: fade-in 15s forwards; 
-        }
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        button {
-            padding: 10px 20px;
-            margin-bottom: 20px; 
-            background-color: #4CAF50; 
-            color: white;
-            border: 2px solid #ffffff;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tajne</title>
+<style>
+    body {
+        background-color: #000; /* Czarne tło */
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        opacity: 0; /* Ukryj stronę na początku */
+        animation: fadeIn ease-in 1s forwards; /* Animacja fadeIn */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; } /* Początkowy stan: całkowicie przezroczysty */
+        100% { opacity: 1; } /* Końcowy stan: całkowicie widoczny */
+    }
+    .container {
+        width: 80%;
+        background-color: #000; /* Czarne tło dla kontenera formularza */
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    input[type="text"], input[type="number"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #222; /* Ciemniejsze tło dla pól tekstowych */
+        color: white;
+    }
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, filter 0.3s ease; /* Dodanie efektu transition dla filtra */
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+        filter: brightness(80%); /* Przyciemnienie przycisku przy najechaniu myszką */
+    }
+    #result {
+        margin-top: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    #gif-container {
+        margin-top: 20px;
+    }
+    h1 {
+        color: #888; /* Trochę jaśniejszy kolor dla nagłówka */
+        text-align: center; /* Wyśrodkowanie tekstu */
+    }
+</style>
 </head>
 <body>
-    <button onclick="pokazProcent()">pokaz procent</button>
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FwPnhp7skzI0%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=982157a09f9aab07e95a7a1ced904c0743c82732eed59fe94a730da6d8c20c3f&ipo=images" alt="image">
+<div id="gif-container">
+    <img src="https://media1.tenor.com/m/KDG1DF-RzdMAAAAC/bitrate-cat.gif" alt="loading" style="width: 200px;">
+</div>
+<div class="container">
+    <form id="affineForm">
+        <textarea id="text" name="text" rows="4" placeholder="Enter text..." required></textarea><br>
+        <input type="hidden" id="a" name="a" value="3">
+        <input type="hidden" id="b" name="b" value="1">
+        <input type="submit" value="Encrypt" onmouseover="this.style.backgroundColor='#45a049'" onmouseout="this.style.backgroundColor='#4CAF50'">
+        <input type="submit" value="Decrypt" onmouseover="this.style.backgroundColor='#45a049'" onmouseout="this.style.backgroundColor='#4CAF50'">
+    </form>
+    <div id="result" style="display:none;">
+        <textarea id="decrypted" rows="4" readonly style="width: 100%;"></textarea>
+    </div>
+</div>
 
-    <script>
-        var wylosowanyProcent = localStorage.getItem('wylosowanyProcent');
-        if (wylosowanyProcent !== null) {
-            alert("Wylosowany procent: " + wylosowanyProcent + "%");
+<script>
+function modInverse(a, m) {
+    a = (a % m + m) % m;
+    for (let x = 1; x < m; x++) {
+        if ((a * x) % m == 1) {
+            return x;
         }
+    }
+    return 1;
+}
 
-        function pokazProcent() {
-            if (wylosowanyProcent !== null) {
-                alert("Wylosowany procent: " + wylosowanyProcent + "%");
-            } else {
-                wylosowanyProcent = Math.floor(Math.random() * 100) + 1; // losowanie liczby od 1 do 100
-                alert("Wylosowany procent: " + wylosowanyProcent + "%"); // wyświetlenie procentu
-
-                // Zapisanie wylosowanego procentu w localStorage
-                localStorage.setItem('wylosowanyProcent', wylosowanyProcent);
-            }
+function affineEncrypt(text, a, b) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+        let charCode = text.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+            result += String.fromCharCode(((a * (charCode - 65) + b) % 26) + 65);
+        } else if (charCode >= 97 && charCode <= 122) {
+            result += String.fromCharCode(((a * (charCode - 97) + b) % 26) + 97);
+        } else {
+            result += text[i];
         }
-    </script>
+    }
+    return result;
+}
+
+function affineDecrypt(ciphertext, a, b) {
+    let result = '';
+    let aInverse = modInverse(a, 26);
+    for (let i = 0; i < ciphertext.length; i++) {
+        let charCode = ciphertext.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) {
+            result += String.fromCharCode(((aInverse * (charCode - 65 - b) + 26) % 26) + 65);
+        } else if (charCode >= 97 && charCode <= 122) {
+            result += String.fromCharCode(((aInverse * (charCode - 97 - b) + 26) % 26) + 97);
+        } else {
+            result += ciphertext[i];
+        }
+    }
+    return result;
+}
+
+document.getElementById('affineForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var formData = new FormData(this);
+    var text = formData.get('text');
+    var a = parseInt(formData.get('a'));
+    var b = parseInt(formData.get('b'));
+    var action = event.submitter.value;
+    var decryptedTextArea = document.getElementById("decrypted");
+
+    if (action === "Encrypt") {
+        decryptedTextArea.value = affineEncrypt(text, a, b);
+    } else {
+        decryptedTextArea.value = affineDecrypt(text, a, b);
+    }
+
+    document.getElementById("result").style.display = 'block';
+});
+</script>
 </body>
 </html>
