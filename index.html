@@ -129,6 +129,33 @@
         margin-bottom: 20px; /* Dodanie marginesu na dół dla odstępu między obrazkiem a przyciskiem */
         cursor: pointer; /* Zmień kursor na wskaźnik */
     }
+    .copy-btn {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, filter 0.3s ease; /* Dodanie efektu transition dla filtra */
+        font-family: 'Rubik', sans-serif; /* Ustawienie czcionki Rubik */
+    }
+    .copy-btn:hover {
+        background-color: #45a049;
+        filter: brightness(80%); /* Przyciemnienie przycisku przy najechaniu myszką */
+    }
+    .notification {
+        position: fixed;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 255, 0, 0.7);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.5s ease, top 0.5s ease; /* Dodanie efektu transition */
+        z-index: 999;
+    }
 </style>
 </head>
 <body>
@@ -136,7 +163,6 @@
     <a href="#" id="homeLink">Home</a>
     <a href="#" id="androidLink">Android</a>
 </div>
-
 <div class="container" id="homeSection">
     <form id="affineForm">
         <textarea id="text" name="text" rows="4" placeholder="Enter text..." required></textarea><br>
@@ -147,13 +173,14 @@
     </form>
     <div id="result" style="display:none;">
         <textarea id="decrypted" rows="4" readonly style="width: 100%;"></textarea>
+        <button class="copy-btn" onclick="copyDecryptedText()">Copy</button>
     </div>
 </div>
 <div class="container" id="androidSection" style="display:none;">
     <h1 id="androidText">Magisk</h1>
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Magisk_Logo.png" id="androidLogo">
 </div>
-
+<div class="notification" id="copyNotification">Copied to clipboard</div>
 <script>
 function modInverse(a, m) {
     a = (a % m + m) % m;
@@ -233,6 +260,22 @@ function switchTab(showSectionId, hideSectionId) {
     }, 500); // Delay to match animation duration
 }
 
+function copyDecryptedText() {
+    var decryptedTextArea = document.getElementById("decrypted");
+    decryptedTextArea.select(); // Zaznacz cały tekst w polu tekstowym
+    document.execCommand("copy"); // Skopiuj zaznaczony tekst do schowka
+    
+    var notification = document.getElementById("copyNotification");
+    notification.style.top = "20px"; // Przesuń powiadomienie na widoczną pozycję
+    notification.style.opacity = "1"; // Pokaż powiadomienie
+    
+    // Schowaj powiadomienie po 2 sekundach
+    setTimeout(function() {
+        notification.style.top = "-50px"; // Schowaj powiadomienie
+        notification.style.opacity = "0"; // Ukryj powiadomienie
+    }, 2000);
+}
+
 document.getElementById('homeLink').addEventListener('click', function(event) {
     event.preventDefault();
     switchTab('homeSection', 'androidSection');
@@ -243,7 +286,6 @@ document.getElementById('androidLink').addEventListener('click', function(event)
     switchTab('androidSection', 'homeSection');
 });
 </script>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('androidLogo').addEventListener('click', function() {
@@ -287,6 +329,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-
 </body>
 </html>
