@@ -25,13 +25,13 @@
         100% { opacity: 1; } /* Końcowy stan: całkowicie widoczny */
     }
     .container {
-        width: 80%;
-        background-color: #000; /* Czarne tło dla kontenera formularza */
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 20px;
-        opacity: 0;
-        animation: fadeIn ease-in 1s forwards; /* Animacja fadeIn */
+    width: 80%;
+    background-color: #000; /* Czarne tło dla kontenera formularza */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 100px; /* Zwiększony margines górny */
+    opacity: 0;
+    animation: fadeIn ease-in 1s forwards; /* Animacja fadeIn */
     }
     input[type="text"], input[type="number"], textarea {
         width: 100%;
@@ -63,9 +63,6 @@
     label {
         display: block;
         margin-bottom: 5px;
-    }
-    #gif-container {
-        margin-top: 20px;
     }
     h1 {
         color: #888; /* Trochę jaśniejszy kolor dla nagłówka */
@@ -140,9 +137,6 @@
     <a href="#" id="androidLink">Android</a>
 </div>
 
-<div id="gif-container">
-    <img src="https://c.tenor.com/KDG1DF-RzdMAAAAC/tenor.gif" alt="loading" style="width: 200px;">
-</div>
 <div class="container" id="homeSection">
     <form id="affineForm">
         <textarea id="text" name="text" rows="4" placeholder="Enter text..." required></textarea><br>
