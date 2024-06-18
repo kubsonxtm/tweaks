@@ -4,30 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tajne</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8093/8093362.png" type="image/png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap">
 <style>
     body {
-        background-color: #000;
+        background-color: #000; /* Czarne tło */
         color: white;
-        font-family: Arial, sans-serif;
+        font-family: 'Rubik', sans-serif; /* Ustawienie czcionki Rubik */
         margin: 0;
         padding: 0;
-        opacity: 0;
-        animation: fadeIn ease-in 1s forwards;
+        opacity: 0; /* Ukryj stronę na początku */
+        animation: fadeIn ease-in 1s forwards; /* Animacja fadeIn */
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
     }
     @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; } 
+        0% { opacity: 0; } /* Początkowy stan: całkowicie przezroczysty */
+        100% { opacity: 1; } /* Końcowy stan: całkowicie widoczny */
     }
     .container {
         width: 80%;
-        background-color: #000;
+        background-color: #000; /* Czarne tło dla kontenera formularza */
         padding: 20px;
         border-radius: 10px;
         margin-top: 20px;
+        opacity: 0;
+        animation: fadeIn ease-in 1s forwards; /* Animacja fadeIn */
     }
     input[type="text"], input[type="number"], textarea {
         width: 100%;
@@ -35,8 +39,9 @@
         margin: 5px 0;
         border: none;
         border-radius: 5px;
-        background-color: #222; 
+        background-color: #222; /* Ciemniejsze tło dla pól tekstowych */
         color: white;
+        font-family: 'Rubik', sans-serif; /* Ustawienie czcionki Rubik */
     }
     input[type="submit"] {
         padding: 10px 20px;
@@ -45,11 +50,12 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s ease, filter 0.3s ease; 
+        transition: background-color 0.3s ease, filter 0.3s ease; /* Dodanie efektu transition dla filtra */
+        font-family: 'Rubik', sans-serif; /* Ustawienie czcionki Rubik */
     }
     input[type="submit"]:hover {
         background-color: #45a049;
-        filter: brightness(80%); 
+        filter: brightness(80%); /* Przyciemnienie przycisku przy najechaniu myszką */
     }
     #result {
         margin-top: 20px;
@@ -62,16 +68,82 @@
         margin-top: 20px;
     }
     h1 {
-        color: #888; 
-        text-align: center; 
+        color: #888; /* Trochę jaśniejszy kolor dla nagłówka */
+        text-align: center; /* Wyśrodkowanie tekstu */
+    }
+    .navbar {
+        position: absolute;
+        top: 40px; /* Przesunięcie nieco niżej */
+        right: 20px; /* Trochę odstępu od prawej krawędzi */
+        padding: 10px;
+    }
+    .navbar a {
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        background-color: #4CAF50;
+        border-radius: 5px;
+        margin-left: 10px;
+        transition: background-color 0.3s ease, filter 0.3s ease; /* Dodanie efektu transition dla filtra */
+        font-family: 'Rubik', sans-serif; /* Ustawienie czcionki Rubik */
+    }
+    .navbar a:hover {
+        background-color: #45a049;
+        filter: brightness(80%); /* Przyciemnienie przycisku przy najechaniu myszką */
+    }
+    .fade {
+        animation: fadeOut ease-in 0.5s forwards; /* Animacja fadeOut */
+    }
+    @keyframes fadeOut {
+        0% { opacity: 1; } /* Początkowy stan: całkowicie widoczny */
+        100% { opacity: 0; } /* Końcowy stan: całkowicie przezroczysty */
+    }
+    .example-links {
+        position: absolute;
+        left: 20px;
+        top: 350px;
+    }
+    .example-links a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        background-color: #4CAF50;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, filter 0.3s ease; /* Dodanie efektu transition dla filtra */
+        font-family: 'Rubik', sans-serif; /* Ustawienie czcionki Rubik */
+    }
+    .example-links a:hover {
+        background-color: #45a049;
+        filter: brightness(80%); /* Przyciemnienie przycisku przy najechaniu myszką */
+    }
+    #androidSection h1 {
+        color: white; /* Biały kolor dla nagłówka w sekcji Android */
+        font-weight: bold; /* Pogrubienie czcionki */
+        font-size: 24px; /* Rozmiar czcionki */
+        text-align: left; /* Wyrównanie do lewej */
+        margin-left: 20px; /* Odstęp od lewej krawędzi */
+    }
+    #androidLogo {
+        width: 150px;
+        margin-top: 0px;
+        display: block; /* Ustawienie obrazka jako blok, aby elementy były poniżej */
+        margin-bottom: 20px; /* Dodanie marginesu na dół dla odstępu między obrazkiem a przyciskiem */
+        cursor: pointer; /* Zmień kursor na wskaźnik */
     }
 </style>
 </head>
 <body>
-<div id="gif-container">
-    <img src="https://media1.tenor.com/m/KDG1DF-RzdMAAAAC/bitrate-cat.gif" alt="loading" style="width: 200px;">
+<div class="navbar">
+    <a href="#" id="homeLink">Home</a>
+    <a href="#" id="androidLink">Android</a>
 </div>
-<div class="container">
+
+<div id="gif-container">
+    <img src="https://c.tenor.com/KDG1DF-RzdMAAAAC/tenor.gif" alt="loading" style="width: 200px;">
+</div>
+<div class="container" id="homeSection">
     <form id="affineForm">
         <textarea id="text" name="text" rows="4" placeholder="Enter text..." required></textarea><br>
         <input type="hidden" id="a" name="a" value="3">
@@ -82,6 +154,10 @@
     <div id="result" style="display:none;">
         <textarea id="decrypted" rows="4" readonly style="width: 100%;"></textarea>
     </div>
+</div>
+<div class="container" id="androidSection" style="display:none;">
+    <h1 id="androidText">Magisk</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Magisk_Logo.png" id="androidLogo">
 </div>
 
 <script>
@@ -143,6 +219,80 @@ document.getElementById('affineForm').addEventListener('submit', function(event)
 
     document.getElementById("result").style.display = 'block';
 });
+
+function switchTab(showSectionId, hideSectionId) {
+    if (document.body.classList.contains('transitioning')) {
+        return; // Prevent switching tabs if already transitioning
+    }
+    
+    document.body.classList.add('transitioning');
+    document.getElementById(hideSectionId).classList.add('fade');
+    setTimeout(function() {
+        document.getElementById(hideSectionId).style.display = 'none';
+        document.getElementById(hideSectionId).classList.remove('fade');
+        
+        document.getElementById(showSectionId).style.display = 'block';
+        setTimeout(function() {
+            document.getElementById(showSectionId).classList.remove('fade');
+            document.body.classList.remove('transitioning');
+        }, 500); // Delay to match animation duration
+    }, 500); // Delay to match animation duration
+}
+
+document.getElementById('homeLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    switchTab('homeSection', 'androidSection');
+});
+
+document.getElementById('androidLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    switchTab('androidSection', 'homeSection');
+});
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('androidLogo').addEventListener('click', function() {
+        switchTab('androidSection', 'homeSection');
+        fadeOutElements(['androidLogo', 'androidText']);
+    });
+
+    function fadeOutElements(elements) {
+        elements.forEach(function(elementId) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                element.classList.add('fade');
+                setTimeout(function() {
+                    element.style.display = 'none';
+                    element.classList.remove('fade');
+                }, 500); // Duration of fadeOut animation
+            }
+        });
+    }
+
+    document.getElementById('homeLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        fadeOutElements(['androidLogo', 'androidText']);
+        setTimeout(function() {
+            switchTab('homeSection', 'androidSection');
+            fadeInElements(['androidLogo', 'androidText']);
+        }, 500); // Wait for fadeOut animation to complete
+    });
+
+    function fadeInElements(elements) {
+        elements.forEach(function(elementId) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                element.classList.add('fade-in');
+                element.style.display = 'block';
+                setTimeout(function() {
+                    element.classList.remove('fade-in');
+                }, 500); // Duration of fadeIn animation
+            }
+        });
+    }
+});
+</script>
+
 </body>
 </html>
