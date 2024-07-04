@@ -3,67 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kotki</title>
+    <title>Animacja Pojawiania się Obrazka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: black;
             overflow: hidden;
+            font-family: 'Rubik', sans-serif;
         }
-        .cat {
+
+        .container {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 1s;
+        }
+
+        .container.hide {
+            opacity: 0;
+        }
+
+        .image-container {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            top: -100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            transition: top 1s, opacity 1s;
+            opacity: 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .image-container.show {
+            top: 50%;
+            opacity: 1;
+            transform: translateY(-50%);
         }
     </style>
 </head>
 <body>
-    <img src="https://i.pinimg.com/originals/74/4f/5d/744f5d7448afafe2e0501539cf310774.jpg" alt="Kot 1" class="cat" id="cat1">
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2Fb9%2Fd6%2Fec%2Fb9d6ec7cd26587c7e01336b93a723876.jpg&f=1&nofb=1&ipt=2dc0f3ca2df475de7aa35842282bb7d39b5239406f4df8570c04052d415c11cc&ipo=images" alt="Kot 2" class="cat" id="cat2">
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F88%2Fac%2Fdf%2F88acdf6a83d616fcf1d2c67a0745ba96.jpg&f=1&nofb=1&ipt=45b929b31616b3184630912fbf2c31e37674e48086a98e78800edcf812ac2ba6&ipo=images" alt="Kot 3" class="cat" id="cat3">
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgflip.com%2F6c394x.jpg&f=1&nofb=1&ipt=ed08ed7f094a73f208dcd6180342edcb39baf9b27cbfbc6b476a288b76385208&ipo=images" alt="Kot 4" class="cat" id="cat4">
+    <div class="container" id="clickText" onclick="showImage()">Kliknij</div>
+    <div class="image-container" id="imageContainer">
+        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F2.bp.blogspot.com%2F-Nc4LmKMRMEw%2FTgthrRegIXI%2FAAAAAAAACJA%2FDDMcdwntOpQ%2Fw1200-h630-p-k-no-nu%2Fi-love-you-cat-cats-kitten-kitty-pic-picture-funny-lolcat-cute-fun-lovely-photo-images.jpg&f=1&nofb=1&ipt=0d70813c642638ad1534be751cfc44931b5bb81aab79422aa5465f78ca9c74cc&ipo=images" alt="Your Image">
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cats = [
-                document.getElementById('cat1'),
-                document.getElementById('cat2'),
-                document.getElementById('cat3'),
-                document.getElementById('cat4')
-            ];
-
-            cats.forEach(cat => {
-                cat.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-                cat.style.top = Math.random() * (window.innerHeight - 100) + 'px';
-
-                let speedX = (Math.random() - 0.5) * 4;
-                let speedY = (Math.random() - 0.5) * 4;
-
-                function moveCat() {
-                    const rect = cat.getBoundingClientRect();
-                    let newX = rect.left + speedX;
-                    let newY = rect.top + speedY;
-
-                    if (newX < 0 || newX > window.innerWidth - rect.width) {
-                        newX = Math.max(0, Math.min(newX, window.innerWidth - rect.width));
-                        speedX *= -1;
-                    }
-
-                    if (newY < 0 || newY > window.innerHeight - rect.height) {
-                        newY = Math.max(0, Math.min(newY, window.innerHeight - rect.height));
-                        speedY *= -1;
-                    }
-
-                    cat.style.left = newX + 'px';
-                    cat.style.top = newY + 'px';
-
-                    requestAnimationFrame(moveCat);
-                }
-
-                moveCat();
-            });
-        });
+        function showImage() {
+            document.getElementById('imageContainer').classList.add('show');
+            document.getElementById('clickText').classList.add('hide');
+        }
     </script>
 </body>
 </html>
