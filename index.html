@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Tweaks</title>
+	<link rel="icon" href="rocket.ico" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            opacity: 0;
+            animation: fadein 2s forwards;
+        }
+
+        .icon {
+            width: 150px;
+            height: 150px;
+            background: url('rocket.ico') no-repeat center center;
+            background-size: contain;
+            position: absolute;
+            animation: move-to-left 4s forwards;
+        }
+
+        .text {
+            margin-left: 20px;
+            font-size: 100px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            opacity: 0;
+            animation: fadein-slide 2s 2s forwards;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.10), 0 0 15px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            font-size: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadein 2s 4s forwards;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.10), 0 0 15px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .button-container {
+            opacity: 0;
+            animation: fadein 2s 6s forwards;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        a button {
+            font-weight: bold;
+            color: black;
+            border-radius: 2rem;
+            cursor: pointer;
+            width: 95.02px;
+            height: 42.66px;
+            border: none;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+        }
+
+        button .span-mother {
+            display: flex;
+            overflow: hidden;
+        }
+
+        button:hover .span-mother {
+            position: absolute;
+        }
+
+        button:hover .span-mother span {
+            transform: translateY(1.2em);
+        }
+
+        button .span-mother span:nth-child(1) {
+            transition: 0.2s;
+        }
+
+        button .span-mother span:nth-child(2) {
+            transition: 0.3s;
+        }
+
+        button .span-mother span:nth-child(3) {
+            transition: 0.4s;
+        }
+
+        button .span-mother span:nth-child(4) {
+            transition: 0.5s;
+        }
+
+        button .span-mother span:nth-child(5) {
+            transition: 0.6s;
+        }
+
+        button .span-mother span:nth-child(6) {
+            transition: 0.7s;
+        }
+
+        button .span-mother span:nth-child(7) {
+            transition: 0.8s;
+        }
+
+        button .span-mother span:nth-child(8) {
+            transition: 0.9s;
+        }
+
+        button .span-mother2 {
+            display: flex;
+            position: absolute;
+            overflow: hidden;
+        }
+
+        button .span-mother2 span {
+            transform: translateY(-1.2em);
+        }
+
+        button:hover .span-mother2 span {
+            transform: translateY(0);
+        }
+
+        button .span-mother2 span {
+            transition: 0.2s;
+        }
+
+        button .span-mother2 span:nth-child(2) {
+            transition: 0.3s;
+        }
+
+        button .span-mother2 span:nth-child(3) {
+            transition: 0.4s;
+        }
+
+        button .span-mother2 span:nth-child(4) {
+            transition: 0.5s;
+        }
+
+        button .span-mother2 span:nth-child(5) {
+            transition: 0.6s;
+        }
+
+        button .span-mother2 span:nth-child(6) {
+            transition: 0.7s;
+        }
+
+        button .span-mother2 span:nth-child(7) {
+            transition: 0.8s;
+        }
+
+        button .span-mother2 span:nth-child(8) {
+            transition: 0.9s;
+        }
+
+        .btn-github {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            border-radius: 100px;
+            font-weight: 800;
+            padding: 0.75rem 1rem;
+            font-size: 0.825rem;
+            line-height: 1rem;
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+            color: #fff;
+			width: auto;
+        }
+
+        .btn-github:hover {
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+                inset 0 0 0 1px rgba(252, 232, 3, 0.08);
+            color: #fce803;
+            transform: translate(0, -0.25rem);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .github-icon {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadein-slide {
+            from {
+                opacity: 0;
+                transform: translateX(50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes move-to-left {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(0px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-550px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon"></div>
+        <div class="text">Windows Tweaks</div>
+        <div class="subtitle">by kubsonxtm</div>
+        <div class="button-container">
+            <a href="https://github.com/kubsonxtm/Windows-Tweaks" target="_blank" style="text-decoration: none;">
+                <button id="download-button">
+                    <span class="span-mother">
+                        <span>D</span><span>o</span><span>w</span><span>n</span><span>l</span><span>o</span><span>a</span><span>d</span>
+                    </span>
+                    <span class="span-mother2">
+                        <span>D</span><span>o</span><span>w</span><span>n</span><span>l</span><span>o</span><span>a</span><span>d</span>
+                    </span>
+                </button>
+            </a>
+            <a href="https://github.com/kubsonxtm/Windows-Tweaks" target="_blank" style="text-decoration: none;">
+    <button class="btn-github">
+        <svg class="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.25 3.438 9.69 8.207 11.289.599.111.793-.26.793-.58v-2.118c-3.338.727-4.037-1.5-4.037-1.5-.548-1.39-1.338-1.762-1.338-1.762-1.092-.747.084-.733.084-.733 1.208.085 1.839 1.24 1.839 1.24 1.071 1.83 2.809 1.3 3.497.998.107-.774.42-1.3.762-1.597-2.664-.303-5.467-1.334-5.467-5.91 0-1.305.465-2.373 1.238-3.213-.124-.303-.535-.915-.124-1.94 0 0 1.241-.407 3.237 1.541 1.233-.342 2.556-.51 3.848-.51s2.615.168 3.848.51c1.996-1.948 3.237-1.541 3.237-1.541.411 1.025-.001 1.637-.124 1.94.773.84 1.238 1.908 1.238 3.213 0 4.584-2.804 5.606-5.469 5.91.423.358.81 1.056.81 2.12v3.298c0 .322.191.692.797.578C20.563 21.69 24 17.25 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        View on GitHub
+    </button>
+</a>
+        </div>
+    </div>
+</body>
+</html>
