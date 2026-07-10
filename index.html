@@ -239,6 +239,139 @@
             50% { transform: translateX(0px); opacity: 1; }
             100% { transform: translateX(-550px); opacity: 1; }
         }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            position: relative;
+            background: linear-gradient(160deg, rgba(15, 15, 20, 0.95), rgba(5, 5, 10, 0.95));
+            border: 1px solid rgb(61, 106, 255);
+            border-radius: 14px;
+            padding: 35px 40px 40px;
+            width: 90%;
+            max-width: 420px;
+            box-shadow: 0 0 40px 5px rgba(61, 106, 255, 0.35);
+            transform: translateY(-20px) scale(0.97);
+            transition: transform 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 4px 8px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: #fce803;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 0 6px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.10), 0 0 15px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0 0 28px;
+        }
+
+        .version-options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .version-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            text-decoration: none;
+            border: 1px solid rgba(61, 106, 255, 0.5);
+            border-radius: 10px;
+            padding: 14px 18px;
+            background: rgba(61, 106, 255, 0.05);
+            transition: all 0.25s ease;
+            text-align: left;
+        }
+
+        .version-option:hover {
+            background: rgba(61, 106, 255, 0.18);
+            border-color: rgb(61, 106, 255);
+            box-shadow: 0 0 20px 2px rgba(0, 142, 236, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .version-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .version-name {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .version-desc {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .version-tag {
+            flex-shrink: 0;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: rgb(61, 106, 255);
+            border: 1px solid rgb(61, 106, 255);
+            border-radius: 6px;
+            padding: 4px 8px;
+        }
     </style>
 </head>
 <body>
@@ -247,11 +380,9 @@
         <div class="text" id="text">Windows Tweaks</div>
         <div class="subtitle" id="subtitle">by kubsonxtm</div>
         <div class="button-container" id="buttons">
-            <a href="https://github.com/kubsonxtm/Windows-Tweaks/archive/refs/heads/main.zip" target="_blank" style="text-decoration: none;">
-                <button>
+            <button id="download-trigger" type="button">
 				Download
-                </button>
-            </a>
+            </button>
             <a href="https://github.com/kubsonxtm/Windows-Tweaks" target="_blank" style="text-decoration: none;">
     <button class="btn-github">
         <svg class="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -262,6 +393,38 @@
 </a>
         </div>
     </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" id="modal-close" aria-label="Zamknij">&times;</button>
+            <h2 class="modal-title">Select a version</h2>
+            <p class="modal-subtitle">Windows Tweaks &mdash; download the version that suits you best.</p>
+            <div class="version-options">
+                <a class="version-option" href="https://github.com/kubsonxtm/Windows-Tweaks-GUI/releases/download/1.0.0/Windows.Tweaks.GUI.exe" target="_blank">
+                    <div class="version-info">
+                        <span class="version-name">Windows Tweaks GUI</span>
+                        <span class="version-desc">Standalone executable, no Python installation required.</span>
+                    </div>
+                    <span class="version-tag">.EXE</span>
+                </a>
+                <a class="version-option" href="https://github.com/kubsonxtm/Windows-Tweaks-GUI/archive/refs/heads/main.zip" target="_blank">
+                    <div class="version-info">
+                        <span class="version-name">Windows Tweaks GUI</span>
+                        <span class="version-desc">Python source code, requires Python installed.</span>
+                    </div>
+                    <span class="version-tag">.PY</span>
+                </a>
+                <a class="version-option" href="https://github.com/kubsonxtm/Windows-Tweaks/archive/refs/heads/main.zip" target="_blank">
+                    <div class="version-info">
+                        <span class="version-name">Windows Tweaks</span>
+                        <span class="version-desc">No-GUI version, managed through local files.</span>
+                    </div>
+                    <span class="version-tag">.ZIP</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.getElementById('icon').addEventListener('click', () => {
             const container = document.getElementById('container');
@@ -279,6 +442,33 @@
             subtitle.style.opacity = '1';
             buttons.style.animation = 'none';
             buttons.style.opacity = '1';
+        });
+
+        const modalOverlay = document.getElementById('modal-overlay');
+        const downloadTrigger = document.getElementById('download-trigger');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal() {
+            modalOverlay.classList.add('active');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        downloadTrigger.addEventListener('click', openModal);
+        modalClose.addEventListener('click', closeModal);
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
         });
     </script>
 </body>
